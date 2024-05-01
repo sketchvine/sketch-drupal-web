@@ -1,0 +1,10 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+      assets/dist/css/styles.css: {}
+global-scripts:
+  version: VERSION
+  js: 
+    assets/dist/js/app.js: {}
+  

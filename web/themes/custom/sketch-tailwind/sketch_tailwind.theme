@@ -1,0 +1,69 @@
+<?php
+
+use Drupal\image\Entity\ImageStyle;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function sketch_tailwind_preprocess_menu(&$variables) {
+  $site_config = \Drupal::config('system.site');
+  $variables['site_name'] = $site_config->get('name');
+  $variables['site_slogan'] = $site_config->get('slogan');
+  $variables['site_logo'] = theme_get_setting('logo.url');
+}
+
+function sketch_tailwind_preprocess_node__homepage_hero(&$variables) {
+  $node = $variables['node'];
+
+  if(isset($node->get('field_homepage_hero_background')->entity)){
+      $style = ImageStyle::load('raw');
+      $variables['homepage_hero_background'] = $style->buildUrl($node->get('field_homepage_hero_background')->entity->getFileUri());
+  }
+}
+
+function sketch_tailwind_preprocess_block(&$variables) {
+
+  if(isset($variables['elements']['content']['#view'])){
+
+    $node = $variables['elements']['content']['#view']->result[0]->_entity;
+
+    if($node){
+      // Build your content types here
+      if ($node instanceof \Drupal\node\Entity\Node) {
+        $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+        $check = $node->access('update', $user);
+        if ($check === TRUE) {
+          $variables['edit_link'] = 'node/' . $node->id() . '/edit';
+        }
+
+        $variables['nid'] = $node->id();
+        if ($node->hasField('field_foreground_image')) {
+          $style = ImageStyle::load('raw');
+          $variables['field_foreground_image'] = $style->buildUrl($node->get('field_foreground_image')->entity->getFileUri());
+          $variables['field_foreground_image_alt'] = $node->get('field_foreground_image')->first()->alt;
+        }
+
+        if ($node->hasField('field_homepage_hero_background')) {
+          $style = ImageStyle::load('raw');
+          $variables['field_homepage_hero_background'] = $style->buildUrl($node->get('field_homepage_hero_background')->entity->getFileUri());
+        }
+
+        if ($node->hasField('field_hero_heading')) {
+          $variables['field_hero_heading'] = $node->get('field_hero_heading')->value;
+        }
+        if ($node->hasField('field_hero_sub_text')) {
+          $variables['field_hero_sub_text'] = $node->get('field_hero_sub_text')->value;
+        }
+        
+        if ($node->hasField('field_hero_cta_button_primary')) {
+          $variables['field_hero_cta_button_primary_uri'] = $node->get('field_hero_cta_button_primary')->first()->getUrl()->toString();
+          $variables['field_hero_cta_button_primary_title'] = $node->get('field_hero_cta_button_primary')->first()->title;
+        }
+        if ($node->hasField('field_rich_text')) {
+          $variables['field_rich_text'] = $node->get('field_rich_text')->value;
+        }
+
+      }
+    }
+  }
+}
