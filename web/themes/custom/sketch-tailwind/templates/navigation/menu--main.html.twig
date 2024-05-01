@@ -24,7 +24,12 @@
   We call a macro which calls itself to render the full tree.
   @see https://twig.symfony.com/doc/1.x/tags/macro.html
 #}
-<div class="header-wrapper">
+
+<div class="header-wrapper-mobile block md:hidden">
+ ==
+</div>
+
+<div class="header-wrapper hidden md:block">
   <div class="wsmainfull menu">
     <div class="wsmainwp max-w-5xl mx-auto">
       {{ menus.menu_links(items, attributes, 0, site_logo, site_name) }}

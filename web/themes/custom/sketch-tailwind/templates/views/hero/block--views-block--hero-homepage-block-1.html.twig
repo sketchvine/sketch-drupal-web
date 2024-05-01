@@ -27,7 +27,7 @@
 #}
 
 {% block content %}
-  <script type="text/jsx-component">
+  <script type="text/jsx-component-disabled">
     {
       "domRootId": "sketch-jsx-{{nid}}",
       "component": "HomepageHero",
@@ -49,7 +49,7 @@
     <section class="hero-section">
       <div class="homepage-hero-background" style="background-image: url({{ field_homepage_hero_background }})"></div>
         
-        <svg class="hero-clippy-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg class="hero-clippy-svg hidden md:block" viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
           <linearGradient id="Gradient1">
             <stop class="stop1" offset="0%" />
@@ -85,9 +85,9 @@
           <!-- HERO TEXT -->
           <div class="col-md-6">
             <div class="hero-1-txt text-white wow fadeInRight">
-              <h1>{{ field_hero_heading }}</h1>
-              <p class="p-xl">{{field_hero_sub_text}}</p>
-              <a class="" href="{{field_hero_cta_button_primary_uri}}">{{field_hero_cta_button_primary_title}}</a>
+              <h1 class="text-8xl md:mb-7">{{ field_hero_heading }}</h1>
+              <p class="text-2xl md:mb-7">{{field_hero_sub_text}}</p>
+              <a class="rounded-md bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500" href="{{field_hero_cta_button_primary_uri}}">{{field_hero_cta_button_primary_title}}</a>
               {{field_rich_text|raw}}
             </div>
           </div>	<!-- END HERO TEXT -->	
