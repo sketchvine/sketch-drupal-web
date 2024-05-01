@@ -16,6 +16,7 @@ function sketch_tailwind_preprocess_node__homepage_hero(&$variables) {
   $node = $variables['node'];
 
   if(isset($node->get('field_homepage_hero_background')->entity)){
+      // @TODO -> check if this style exists...
       $style = ImageStyle::load('raw');
       $variables['homepage_hero_background'] = $style->buildUrl($node->get('field_homepage_hero_background')->entity->getFileUri());
   }
