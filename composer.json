@@ -21,7 +21,7 @@
         "drupal/core-recommended": "^10.2",
         "drupal/metatag": "^2.0",
         "drupal/save_edit": "^1.7",
-        "drupal/stable": "^2.0",        
+        "drupal/stable": "^2.0"    
     },
     "conflict": {
         "drupal/drupal": "*"

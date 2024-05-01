@@ -11,3 +11,5 @@ web/sites/
 web/themes/contrib/
 web/core/
 web/modules/contrib/
+/.editorconfig
+/.gitattributes
