@@ -25,17 +25,47 @@
   @see https://twig.symfony.com/doc/1.x/tags/macro.html
 #}
 
-<div class="header-wrapper-mobile block md:hidden">
- ==
-</div>
-
-<div class="header-wrapper hidden md:block">
+<script type="text/jsx-component">
+  {
+    "domRootId": "sketch-jsx-global-nav",
+    "component": "GlobalNav",
+    "props": {
+      "site_logo": "{{ site_logo }}",
+      "site_title": "{{ site_name }}",
+      "items": {{ menus.menu_links_props(items, 0) }}
+      {% if edit_link %},"edit_link": "{{edit_link}}"{% endif %}
+    }
+  }
+</script>
+<div id="sketch-jsx-global-nav" class="global-nav-root">
+  <div class="header-wrapper hidden md:block">
   <div class="wsmainfull menu">
     <div class="wsmainwp max-w-5xl mx-auto">
       {{ menus.menu_links(items, attributes, 0, site_logo, site_name) }}
     </div>
   </div>
 </div>
+
+</div>
+
+
+
+{% macro menu_links_props(items, menu_level) %}
+  {% import _self as menus %}
+  
+  {% if items %}
+  [
+    {% for item in items %}
+    {
+      "item_title": "{{item.title}}",
+      "item_url": "{{item.url}}"
+      {% if item.below %}, "items": {{ menus.menu_links_props(item.below, menu_level + 1) }}{% endif %}
+    }{% if (loop.index != loop.length) %},{% endif %}
+    {% endfor %}
+  ]
+  {% endif %}
+{% endmacro %}    
+
 
 {% macro menu_links(items, attributes, menu_level, logo, page_title) %}
   {% import _self as menus %}
@@ -51,14 +81,9 @@
     {% for item in items %}
       
       {% if item.title == "Home" %}
-        <div class="flex-1 logo-light">
+        <div class="flex">
           <a href="/">
-            <img src="/sites/default/files/sketchvine_beta_logo-3_black.png" alt="{{ page_title }}" style="width: auto;max-width: inherit;max-height: 38px;" width="204" height="38"/>
-          </a>
-        </div>
-        <div class="flex-1 logo-dark">
-          <a href="/">
-            <img src="{{ logo ~'' }}" alt="{{ page_title }}" style="width: auto;max-width: inherit;max-height: 38px;" width="204" height="38"/>
+            {{ source('/sites/default/files/sketchvine_beta_logo-3.svg') }}
           </a>
         </div>
         <ul class="flex mr-48">

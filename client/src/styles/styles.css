@@ -60,12 +60,76 @@ body.toolbar-tray-open.toolbar-horizontal .header-wrapper {
   -ms-transition: all 450ms ease-in-out;
   transition: all 450ms ease-in-out;
 }
-
-.wsmainfull .logo-light {
-  display: none;
+.front .global-nav-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;  
 }
-.wsmainfull .logo-dark {
-  display: block;
+.front .global-nav-root > nav {
+  padding: 20px 0;
+  -webkit-transition: all 450ms ease-in-out;
+  -moz-transition: all 450ms ease-in-out;
+  -o-transition: all 450ms ease-in-out;
+  -ms-transition: all 450ms ease-in-out;
+  transition: all 450ms ease-in-out;
+}
+.front .global-nav-root nav {
+  background-color: transparent !important;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.front .global-nav-root > nav.scroll {
+  padding: 0;
+  background-color: rgba(255, 255, 255, .7) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    -webkit-box-shadow: 0 2px 3px rgba(96, 96, 96, .1);
+    -moz-box-shadow: 0 2px 3px rgba(96, 96, 96, .1);
+    box-shadow: 0 2px 3px rgba(96, 96, 96, .1);
+}
+
+
+.front .global-nav-root .global-nav-menu--desktop-link {
+  color: white !important;
+}
+
+.front .global-nav-root .scroll .global-nav-menu--desktop-link {
+  color: black !important;
+}
+
+.front .sketchvine_beta_logo-3_svg__svg-logo--wrapper,
+.front .svg-logo--wrapper {
+  fill-opacity: 0;
+  stroke: none;
+}
+.front .sketchvine_beta_logo-3_svg__svg-logo--icon,
+.front .svg-logo--icon {
+  fill-opacity: 1;
+  fill: white;
+  stroke: none;
+}
+.front .sketchvine_beta_logo-3_svg__svg-logo--text,
+.front .svg-logo--text {
+  fill-opacity: 1;
+  fill: white;
+  stroke: none;
+}
+
+.front .scroll .sketchvine_beta_logo-3_svg__svg-logo--wrapper,
+.front .scroll .svg-logo--wrapper {
+  fill-opacity: 0;
+  stroke: none;
+}
+.front .scroll .sketchvine_beta_logo-3_svg__svg-logo--icon,
+.front .scroll .svg-logo--icon {
+  fill: black;
+}
+.front .scroll .sketchvine_beta_logo-3_svg__svg-logo--text,
+.front .scroll .svg-logo--text {
+  fill: black;
 }
 
 .wsmainfull.scroll {
